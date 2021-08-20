@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6d571360f94a435e8aca91ed5f2aee86" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_Groups" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_Leased_or_Purchased" Width="1.5" PointX="3" PointY="10.125" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_Manufacturers" Width="1.5" PointX="3" PointY="2" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_Ownership" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_Priority" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_Under" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_Users" Width="1.5" PointX="13.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Assets_Masters" Width="1.5" PointX="5.75" PointY="6" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Binary" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Camera_Status" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Current_Location" Width="1.5" PointX="14.125" PointY="5.25" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Current_Status" Width="2" PointX="2.5" PointY="12.875" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Frequency" Width="1.5" PointX="3.375" PointY="21.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Frequency_Of_Annual_Maintenance_Contract" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Service_Provider_Of_Asset" Width="1.5" PointX="10.25" PointY="6.625" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Sub_Group" Width="1.5" PointX="3" PointY="16.25" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Tag_Type" Width="1.5" PointX="3.375" PointY="19.375" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Groups" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Sub_Group_LUT_Asset_Groups" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Manufacturers" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Current_Status" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Frequency" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Sub_Group" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Tag_Type" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_Leased_To" Width="1.5" PointX="12.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Current_Condition" Width="1.5" PointX="7.875" PointY="8.25" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Current_Condition" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.Geopoint" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Asset_History" Width="1.5" PointX="8.375" PointY="12.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Binary_Q" Width="1.5" PointX="12.375" PointY="9.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Questions" Width="1.5" PointX="10.375" PointY="12.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.MarkersN" Width="1.5" PointX="12.375" PointY="12.75" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_Maintenance" Width="1.5" PointX="13.875" PointY="0.5" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Maintenance" />
+        <EntityTypeShape EntityType="AssetTaggingModel1.LUT_History_of_Asset" Width="1.5" PointX="8" PointY="15.875" />
+        <AssociationConnector Association="AssetTaggingModel1.FK_LUT_History_of_Asset_LUT_Assets_Masters" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AssetTaggingModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Geopoint">
+          <Key>
+            <PropertyRef Name="GeopointId" />
+          </Key>
+          <Property Name="GeopointId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+          <Property Name="ts" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="GeographyPoint" Type="geography" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Groups">
+          <Key>
+            <PropertyRef Name="AGrpID" />
+          </Key>
+          <Property Name="AGrpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asset_Groups" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_History">
+          <Key>
+            <PropertyRef Name="AHID" />
+          </Key>
+          <Property Name="AHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asset History" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Leased_or_Purchased">
+          <Key>
+            <PropertyRef Name="ALPID" />
+          </Key>
+          <Property Name="ALPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asset_Leased_or_Purchased" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Leased_To">
+          <Key>
+            <PropertyRef Name="ALID" />
+          </Key>
+          <Property Name="ALID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asset_Leased_To" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Manufacturers">
+          <Key>
+            <PropertyRef Name="MnfID" />
+          </Key>
+          <Property Name="MnfID" Type="int" Nullable="false" />
+          <Property Name="Asset_Manufacturer" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Ownership">
+          <Key>
+            <PropertyRef Name="AOID" />
+          </Key>
+          <Property Name="AOID" Type="int" Nullable="false" />
+          <Property Name="Asset_Ownership" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Priority">
+          <Key>
+            <PropertyRef Name="APID" />
+          </Key>
+          <Property Name="APID" Type="int" Nullable="false" />
+          <Property Name="Asset_Priority" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Under">
+          <Key>
+            <PropertyRef Name="AUID" />
+          </Key>
+          <Property Name="AUID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asset_Under" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Users">
+          <Key>
+            <PropertyRef Name="UsID" />
+          </Key>
+          <Property Name="UsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecurityQ" Type="nvarchar(max)" />
+          <Property Name="SecurityA" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameOfUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Assets_Masters">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="int" Nullable="false" />
+          <Property Name="Name_of_Asset" Type="nvarchar" MaxLength="80" />
+          <Property Name="AGrpID" Type="int" Nullable="false" />
+          <Property Name="SGID" Type="int" Nullable="false" />
+          <Property Name="MnfID" Type="int" Nullable="false" />
+          <Property Name="SPID" Type="int" Nullable="false" />
+          <Property Name="Date_of_Purchase" Type="datetime" Nullable="false" />
+          <Property Name="Date_of_Disposal" Type="datetime" />
+          <Property Name="Purchase_Price" Type="float" Nullable="false" />
+          <Property Name="FID" Type="int" Nullable="false" />
+          <Property Name="Photo_of_Asset" Type="image" />
+          <Property Name="Current_Location_X" Type="float" Nullable="false" />
+          <Property Name="Current_Location_Y" Type="float" Nullable="false" />
+          <Property Name="CSID" Type="int" Nullable="false" />
+          <Property Name="CCID" Type="int" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Sub_Model" Type="nvarchar" MaxLength="80" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="TID" Type="int" Nullable="false" />
+          <Property Name="Depriciation_Value" Type="float" Nullable="false" />
+          <Property Name="Warranty" Type="bit" Nullable="false" />
+          <Property Name="AMC" Type="bit" Nullable="false" />
+          <Property Name="PM" Type="bit" Nullable="false" />
+          <Property Name="QR" Type="bit" Nullable="false" />
+          <Property Name="NFC" Type="bit" Nullable="false" />
+          <Property Name="GPS" Type="bit" Nullable="false" />
+          <Property Name="Camera" Type="bit" Nullable="false" />
+          <Property Name="Barcode" Type="bit" Nullable="false" />
+          <Property Name="ALPID" Type="int" Nullable="false" />
+          <Property Name="Maintenance" Type="bit" Nullable="false" />
+          <Property Name="RFID" Type="bit" Nullable="false" />
+          <Property Name="MID" Type="int" Nullable="false" />
+          <Property Name="GeographicPoint" Type="geography" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="LUT_Binary">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Binary" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LUT_Binary_Q">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="QID" Type="int" Nullable="false" />
+          <Property Name="AID" Type="int" Nullable="false" />
+          <Property Name="Binary" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LUT_Camera_Status">
+          <Key>
+            <PropertyRef Name="CaSID" />
+          </Key>
+          <Property Name="CaSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Camera_Status" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Current_Condition">
+          <Key>
+            <PropertyRef Name="CCID" />
+          </Key>
+          <Property Name="CCID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Current_Condition" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Current_Location">
+          <Key>
+            <PropertyRef Name="CLID" />
+          </Key>
+          <Property Name="CLID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Current_Location_X" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Current_Location_Y" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Last_Modified" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Current_Status">
+          <Key>
+            <PropertyRef Name="CSID" />
+          </Key>
+          <Property Name="CSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Current_Status" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Frequency">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Frequency" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Frequency_Of_Annual_Maintenance_Contract">
+          <Key>
+            <PropertyRef Name="FAMCID" />
+          </Key>
+          <Property Name="FAMCID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Frequency_of_AMC" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_History_of_Asset">
+          <Key>
+            <PropertyRef Name="AHID" />
+          </Key>
+          <Property Name="AHID" Type="int" Nullable="false" />
+          <Property Name="AID" Type="int" Nullable="false" />
+          <Property Name="HID" Type="int" Nullable="false" />
+          <Property Name="Current_Location_X" Type="float" Nullable="false" />
+          <Property Name="Current_Location_Y" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Maintenance">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Maintenance" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Questions">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Service_Provider_Of_Asset">
+          <Key>
+            <PropertyRef Name="SPID" />
+          </Key>
+          <Property Name="SPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Service_Provider_of_Asset" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Sub_Group">
+          <Key>
+            <PropertyRef Name="SGID" />
+          </Key>
+          <Property Name="SGID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AGrpID" Type="int" Nullable="false" />
+          <Property Name="Sub_Group" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Tag_Type">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tag_Type" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarkersN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" Nullable="false" />
+          <Property Name="Lat" Type="float" Nullable="false" />
+          <Property Name="Long" Type="float" Nullable="false" />
+          <Property Name="Type" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Asset_Groups">
+          <End Role="LUT_Asset_Groups" Type="Self.LUT_Asset_Groups" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Asset_Groups">
+              <PropertyRef Name="AGrpID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="AGrpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased">
+          <End Role="LUT_Asset_Leased_or_Purchased" Type="Self.LUT_Asset_Leased_or_Purchased" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Asset_Leased_or_Purchased">
+              <PropertyRef Name="ALPID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="ALPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Asset_Manufacturers">
+          <End Role="LUT_Asset_Manufacturers" Type="Self.LUT_Asset_Manufacturers" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Asset_Manufacturers">
+              <PropertyRef Name="MnfID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="MnfID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Current_Condition">
+          <End Role="LUT_Current_Condition" Type="Self.LUT_Current_Condition" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Current_Condition">
+              <PropertyRef Name="CCID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="CCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Current_Status">
+          <End Role="LUT_Current_Status" Type="Self.LUT_Current_Status" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Current_Status">
+              <PropertyRef Name="CSID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="CSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Frequency">
+          <End Role="LUT_Frequency" Type="Self.LUT_Frequency" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Frequency">
+              <PropertyRef Name="FID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Maintenance">
+          <End Role="LUT_Maintenance" Type="Self.LUT_Maintenance" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Maintenance">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset">
+          <End Role="LUT_Service_Provider_Of_Asset" Type="Self.LUT_Service_Provider_Of_Asset" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Service_Provider_Of_Asset">
+              <PropertyRef Name="SPID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="SPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Tag_Type">
+          <End Role="LUT_Tag_Type" Type="Self.LUT_Tag_Type" Multiplicity="1" />
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Tag_Type">
+              <PropertyRef Name="TID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="TID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_History_of_Asset_LUT_Assets_Masters">
+          <End Role="LUT_Assets_Masters" Type="Self.LUT_Assets_Masters" Multiplicity="1" />
+          <End Role="LUT_History_of_Asset" Type="Self.LUT_History_of_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Assets_Masters">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="LUT_History_of_Asset">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Sub_Group_LUT_Asset_Groups">
+          <End Role="LUT_Asset_Groups" Type="Self.LUT_Asset_Groups" Multiplicity="1" />
+          <End Role="LUT_Sub_Group" Type="Self.LUT_Sub_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Asset_Groups">
+              <PropertyRef Name="AGrpID" />
+            </Principal>
+            <Dependent Role="LUT_Sub_Group">
+              <PropertyRef Name="AGrpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AssetTaggingModel1StoreContainer">
+          <EntitySet Name="Geopoint" EntityType="Self.Geopoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_Groups" EntityType="Self.LUT_Asset_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_History" EntityType="Self.LUT_Asset_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_Leased_or_Purchased" EntityType="Self.LUT_Asset_Leased_or_Purchased" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_Leased_To" EntityType="Self.LUT_Asset_Leased_To" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_Manufacturers" EntityType="Self.LUT_Asset_Manufacturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_Ownership" EntityType="Self.LUT_Asset_Ownership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_Priority" EntityType="Self.LUT_Asset_Priority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_Under" EntityType="Self.LUT_Asset_Under" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Asset_Users" EntityType="Self.LUT_Asset_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Assets_Masters" EntityType="Self.LUT_Assets_Masters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Binary" EntityType="Self.LUT_Binary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Binary_Q" EntityType="Self.LUT_Binary_Q" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Camera_Status" EntityType="Self.LUT_Camera_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Current_Condition" EntityType="Self.LUT_Current_Condition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Current_Location" EntityType="Self.LUT_Current_Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Current_Status" EntityType="Self.LUT_Current_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Frequency" EntityType="Self.LUT_Frequency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Frequency_Of_Annual_Maintenance_Contract" EntityType="Self.LUT_Frequency_Of_Annual_Maintenance_Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_History_of_Asset" EntityType="Self.LUT_History_of_Asset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Maintenance" EntityType="Self.LUT_Maintenance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Questions" EntityType="Self.LUT_Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Service_Provider_Of_Asset" EntityType="Self.LUT_Service_Provider_Of_Asset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Sub_Group" EntityType="Self.LUT_Sub_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LUT_Tag_Type" EntityType="Self.LUT_Tag_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarkersN" EntityType="Self.MarkersN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Asset_Groups" Association="Self.FK_LUT_Assets_Masters_LUT_Asset_Groups">
+            <End Role="LUT_Asset_Groups" EntitySet="LUT_Asset_Groups" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased" Association="Self.FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased">
+            <End Role="LUT_Asset_Leased_or_Purchased" EntitySet="LUT_Asset_Leased_or_Purchased" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Asset_Manufacturers" Association="Self.FK_LUT_Assets_Masters_LUT_Asset_Manufacturers">
+            <End Role="LUT_Asset_Manufacturers" EntitySet="LUT_Asset_Manufacturers" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Current_Condition" Association="Self.FK_LUT_Assets_Masters_LUT_Current_Condition">
+            <End Role="LUT_Current_Condition" EntitySet="LUT_Current_Condition" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Current_Status" Association="Self.FK_LUT_Assets_Masters_LUT_Current_Status">
+            <End Role="LUT_Current_Status" EntitySet="LUT_Current_Status" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Frequency" Association="Self.FK_LUT_Assets_Masters_LUT_Frequency">
+            <End Role="LUT_Frequency" EntitySet="LUT_Frequency" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Maintenance" Association="Self.FK_LUT_Assets_Masters_LUT_Maintenance">
+            <End Role="LUT_Maintenance" EntitySet="LUT_Maintenance" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset" Association="Self.FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset">
+            <End Role="LUT_Service_Provider_Of_Asset" EntitySet="LUT_Service_Provider_Of_Asset" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Tag_Type" Association="Self.FK_LUT_Assets_Masters_LUT_Tag_Type">
+            <End Role="LUT_Tag_Type" EntitySet="LUT_Tag_Type" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_History_of_Asset_LUT_Assets_Masters" Association="Self.FK_LUT_History_of_Asset_LUT_Assets_Masters">
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+            <End Role="LUT_History_of_Asset" EntitySet="LUT_History_of_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Sub_Group_LUT_Asset_Groups" Association="Self.FK_LUT_Sub_Group_LUT_Asset_Groups">
+            <End Role="LUT_Asset_Groups" EntitySet="LUT_Asset_Groups" />
+            <End Role="LUT_Sub_Group" EntitySet="LUT_Sub_Group" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AssetTaggingModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AssetTaggingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LUT_Asset_Groups" EntityType="AssetTaggingModel1.LUT_Asset_Groups" />
+          <EntitySet Name="LUT_Asset_Leased_or_Purchased" EntityType="AssetTaggingModel1.LUT_Asset_Leased_or_Purchased" />
+          <EntitySet Name="LUT_Asset_Manufacturers" EntityType="AssetTaggingModel1.LUT_Asset_Manufacturers" />
+          <EntitySet Name="LUT_Asset_Ownership" EntityType="AssetTaggingModel1.LUT_Asset_Ownership" />
+          <EntitySet Name="LUT_Asset_Priority" EntityType="AssetTaggingModel1.LUT_Asset_Priority" />
+          <EntitySet Name="LUT_Asset_Under" EntityType="AssetTaggingModel1.LUT_Asset_Under" />
+          <EntitySet Name="LUT_Asset_Users" EntityType="AssetTaggingModel1.LUT_Asset_Users" />
+          <EntitySet Name="LUT_Assets_Masters" EntityType="AssetTaggingModel1.LUT_Assets_Masters" />
+          <EntitySet Name="LUT_Binary" EntityType="AssetTaggingModel1.LUT_Binary" />
+          <EntitySet Name="LUT_Camera_Status" EntityType="AssetTaggingModel1.LUT_Camera_Status" />
+          <EntitySet Name="LUT_Current_Location" EntityType="AssetTaggingModel1.LUT_Current_Location" />
+          <EntitySet Name="LUT_Current_Status" EntityType="AssetTaggingModel1.LUT_Current_Status" />
+          <EntitySet Name="LUT_Frequency" EntityType="AssetTaggingModel1.LUT_Frequency" />
+          <EntitySet Name="LUT_Frequency_Of_Annual_Maintenance_Contract" EntityType="AssetTaggingModel1.LUT_Frequency_Of_Annual_Maintenance_Contract" />
+          <EntitySet Name="LUT_Service_Provider_Of_Asset" EntityType="AssetTaggingModel1.LUT_Service_Provider_Of_Asset" />
+          <EntitySet Name="LUT_Sub_Group" EntityType="AssetTaggingModel1.LUT_Sub_Group" />
+          <EntitySet Name="LUT_Tag_Type" EntityType="AssetTaggingModel1.LUT_Tag_Type" />
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Asset_Groups" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Groups">
+            <End Role="LUT_Asset_Groups" EntitySet="LUT_Asset_Groups" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Sub_Group_LUT_Asset_Groups" Association="AssetTaggingModel1.FK_LUT_Sub_Group_LUT_Asset_Groups">
+            <End Role="LUT_Asset_Groups" EntitySet="LUT_Asset_Groups" />
+            <End Role="LUT_Sub_Group" EntitySet="LUT_Sub_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased">
+            <End Role="LUT_Asset_Leased_or_Purchased" EntitySet="LUT_Asset_Leased_or_Purchased" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Asset_Manufacturers" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Manufacturers">
+            <End Role="LUT_Asset_Manufacturers" EntitySet="LUT_Asset_Manufacturers" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Current_Status" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Current_Status">
+            <End Role="LUT_Current_Status" EntitySet="LUT_Current_Status" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Frequency" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Frequency">
+            <End Role="LUT_Frequency" EntitySet="LUT_Frequency" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset">
+            <End Role="LUT_Service_Provider_Of_Asset" EntitySet="LUT_Service_Provider_Of_Asset" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Sub_Group" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Sub_Group">
+            <End Role="LUT_Sub_Group" EntitySet="LUT_Sub_Group" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Tag_Type" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Tag_Type">
+            <End Role="LUT_Tag_Type" EntitySet="LUT_Tag_Type" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <EntitySet Name="LUT_Asset_Leased_To" EntityType="AssetTaggingModel1.LUT_Asset_Leased_To" />
+          <EntitySet Name="LUT_Current_Condition" EntityType="AssetTaggingModel1.LUT_Current_Condition" />
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Current_Condition" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Current_Condition">
+            <End Role="LUT_Current_Condition" EntitySet="LUT_Current_Condition" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <EntitySet Name="Geopoints" EntityType="AssetTaggingModel1.Geopoint" />
+          <EntitySet Name="LUT_Asset_History" EntityType="AssetTaggingModel1.LUT_Asset_History" />
+          <EntitySet Name="LUT_Binary_Q" EntityType="AssetTaggingModel1.LUT_Binary_Q" />
+          <EntitySet Name="LUT_Questions" EntityType="AssetTaggingModel1.LUT_Questions" />
+          <EntitySet Name="MarkersNs" EntityType="AssetTaggingModel1.MarkersN" />
+          <EntitySet Name="LUT_Maintenance" EntityType="AssetTaggingModel1.LUT_Maintenance" />
+          <AssociationSet Name="FK_LUT_Assets_Masters_LUT_Maintenance" Association="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Maintenance">
+            <End Role="LUT_Maintenance" EntitySet="LUT_Maintenance" />
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+          </AssociationSet>
+          <EntitySet Name="LUT_History_of_Asset" EntityType="AssetTaggingModel1.LUT_History_of_Asset" />
+          <AssociationSet Name="FK_LUT_History_of_Asset_LUT_Assets_Masters" Association="AssetTaggingModel1.FK_LUT_History_of_Asset_LUT_Assets_Masters">
+            <End Role="LUT_Assets_Masters" EntitySet="LUT_Assets_Masters" />
+            <End Role="LUT_History_of_Asset" EntitySet="LUT_History_of_Asset" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="LUT_Asset_Groups">
+          <Key>
+            <PropertyRef Name="AGrpID" />
+          </Key>
+          <Property Name="AGrpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asset_Groups" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Groups" FromRole="LUT_Asset_Groups" ToRole="LUT_Assets_Masters" />
+          <NavigationProperty Name="LUT_Sub_Group" Relationship="AssetTaggingModel1.FK_LUT_Sub_Group_LUT_Asset_Groups" FromRole="LUT_Asset_Groups" ToRole="LUT_Sub_Group" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Leased_or_Purchased">
+          <Key>
+            <PropertyRef Name="ALPID" />
+          </Key>
+          <Property Name="ALPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asset_Leased_or_Purchased" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased" FromRole="LUT_Asset_Leased_or_Purchased" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Manufacturers">
+          <Key>
+            <PropertyRef Name="MnfID" />
+          </Key>
+          <Property Name="MnfID" Type="Int32" Nullable="false" />
+          <Property Name="Asset_Manufacturer" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Manufacturers" FromRole="LUT_Asset_Manufacturers" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Ownership">
+          <Key>
+            <PropertyRef Name="AOID" />
+          </Key>
+          <Property Name="AOID" Type="Int32" Nullable="false" />
+          <Property Name="Asset_Ownership" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Priority">
+          <Key>
+            <PropertyRef Name="APID" />
+          </Key>
+          <Property Name="APID" Type="Int32" Nullable="false" />
+          <Property Name="Asset_Priority" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Under">
+          <Key>
+            <PropertyRef Name="AUID" />
+          </Key>
+          <Property Name="AUID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asset_Under" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_Users">
+          <Key>
+            <PropertyRef Name="UsID" />
+          </Key>
+          <Property Name="UsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityQ" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameOfUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Assets_Masters">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="Int32" Nullable="false" />
+          <Property Name="Name_of_Asset" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="AGrpID" Type="Int32" Nullable="false" />
+          <Property Name="SGID" Type="Int32" Nullable="false" />
+          <Property Name="MnfID" Type="Int32" Nullable="false" />
+          <Property Name="SPID" Type="Int32" Nullable="false" />
+          <Property Name="Date_of_Purchase" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_of_Disposal" Type="DateTime" Precision="3" />
+          <Property Name="Purchase_Price" Type="Double" Nullable="false" />
+          <Property Name="FID" Type="Int32" Nullable="false" />
+          <Property Name="Photo_of_Asset" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CSID" Type="Int32" Nullable="false" />
+          <Property Name="CCID" Type="Int32" Nullable="false" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Sub_Model" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TID" Type="Int32" Nullable="false" />
+          <Property Name="Depriciation_Value" Type="Double" Nullable="false" />
+          <Property Name="Warranty" Type="Boolean" Nullable="false" />
+          <Property Name="AMC" Type="Boolean" Nullable="false" />
+          <Property Name="PM" Type="Boolean" Nullable="false" />
+          <Property Name="QR" Type="Boolean" Nullable="false" />
+          <Property Name="NFC" Type="Boolean" Nullable="false" />
+          <Property Name="GPS" Type="Boolean" Nullable="false" />
+          <Property Name="Camera" Type="Boolean" Nullable="false" />
+          <Property Name="Barcode" Type="Boolean" Nullable="false" />
+          <Property Name="ALPID" Type="Int32" Nullable="false" />
+          <Property Name="Maintenance" Type="Boolean" Nullable="false" />
+          <Property Name="RFID" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Asset_Groups" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Groups" FromRole="LUT_Assets_Masters" ToRole="LUT_Asset_Groups" />
+          <NavigationProperty Name="LUT_Asset_Leased_or_Purchased" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased" FromRole="LUT_Assets_Masters" ToRole="LUT_Asset_Leased_or_Purchased" />
+          <NavigationProperty Name="LUT_Asset_Manufacturers" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Asset_Manufacturers" FromRole="LUT_Assets_Masters" ToRole="LUT_Asset_Manufacturers" />
+          <NavigationProperty Name="LUT_Current_Status" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Current_Status" FromRole="LUT_Assets_Masters" ToRole="LUT_Current_Status" />
+          <NavigationProperty Name="LUT_Frequency" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Frequency" FromRole="LUT_Assets_Masters" ToRole="LUT_Frequency" />
+          <NavigationProperty Name="LUT_Service_Provider_Of_Asset" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset" FromRole="LUT_Assets_Masters" ToRole="LUT_Service_Provider_Of_Asset" />
+          <NavigationProperty Name="LUT_Sub_Group" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Sub_Group" FromRole="LUT_Assets_Masters" ToRole="LUT_Sub_Group" />
+          <NavigationProperty Name="LUT_Tag_Type" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Tag_Type" FromRole="LUT_Assets_Masters" ToRole="LUT_Tag_Type" />
+          <NavigationProperty Name="LUT_Current_Condition" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Current_Condition" FromRole="LUT_Assets_Masters" ToRole="LUT_Current_Condition" />
+          <Property Name="Current_Location_X" Type="Double" Nullable="false" />
+          <Property Name="Current_Location_Y" Type="Double" Nullable="false" />
+          <Property Name="GeographicPoint" Type="Geography" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="MID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LUT_Maintenance" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Maintenance" FromRole="LUT_Assets_Masters" ToRole="LUT_Maintenance" />
+          <NavigationProperty Name="LUT_History_of_Asset" Relationship="AssetTaggingModel1.FK_LUT_History_of_Asset_LUT_Assets_Masters" FromRole="LUT_Assets_Masters" ToRole="LUT_History_of_Asset" />
+        </EntityType>
+        <EntityType Name="LUT_Binary">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Binary" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LUT_Camera_Status">
+          <Key>
+            <PropertyRef Name="CaSID" />
+          </Key>
+          <Property Name="CaSID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Camera_Status" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Current_Location">
+          <Key>
+            <PropertyRef Name="CLID" />
+          </Key>
+          <Property Name="CLID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Current_Location_X" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Current_Location_Y" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Last_Modified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Current_Status">
+          <Key>
+            <PropertyRef Name="CSID" />
+          </Key>
+          <Property Name="CSID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Current_Status" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Current_Status" FromRole="LUT_Current_Status" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <EntityType Name="LUT_Frequency">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Frequency" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Frequency" FromRole="LUT_Frequency" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <EntityType Name="LUT_Frequency_Of_Annual_Maintenance_Contract">
+          <Key>
+            <PropertyRef Name="FAMCID" />
+          </Key>
+          <Property Name="FAMCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Frequency_of_AMC" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Service_Provider_Of_Asset">
+          <Key>
+            <PropertyRef Name="SPID" />
+          </Key>
+          <Property Name="SPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Service_Provider_of_Asset" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset" FromRole="LUT_Service_Provider_Of_Asset" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <EntityType Name="LUT_Sub_Group">
+          <Key>
+            <PropertyRef Name="SGID" />
+          </Key>
+          <Property Name="SGID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AGrpID" Type="Int32" Nullable="false" />
+          <Property Name="Sub_Group" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Asset_Groups" Relationship="AssetTaggingModel1.FK_LUT_Sub_Group_LUT_Asset_Groups" FromRole="LUT_Sub_Group" ToRole="LUT_Asset_Groups" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Sub_Group" FromRole="LUT_Sub_Group" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <EntityType Name="LUT_Tag_Type">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tag_Type" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Tag_Type" FromRole="LUT_Tag_Type" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Asset_Groups">
+          <End Type="AssetTaggingModel1.LUT_Asset_Groups" Role="LUT_Asset_Groups" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Asset_Groups">
+              <PropertyRef Name="AGrpID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="AGrpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Sub_Group_LUT_Asset_Groups">
+          <End Type="AssetTaggingModel1.LUT_Asset_Groups" Role="LUT_Asset_Groups" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Sub_Group" Role="LUT_Sub_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Asset_Groups">
+              <PropertyRef Name="AGrpID" />
+            </Principal>
+            <Dependent Role="LUT_Sub_Group">
+              <PropertyRef Name="AGrpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Asset_Leased_or_Purchased">
+          <End Type="AssetTaggingModel1.LUT_Asset_Leased_or_Purchased" Role="LUT_Asset_Leased_or_Purchased" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Asset_Leased_or_Purchased">
+              <PropertyRef Name="ALPID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="ALPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Asset_Manufacturers">
+          <End Type="AssetTaggingModel1.LUT_Asset_Manufacturers" Role="LUT_Asset_Manufacturers" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Asset_Manufacturers">
+              <PropertyRef Name="MnfID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="MnfID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Current_Status">
+          <End Type="AssetTaggingModel1.LUT_Current_Status" Role="LUT_Current_Status" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Current_Status">
+              <PropertyRef Name="CSID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="CSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Frequency">
+          <End Type="AssetTaggingModel1.LUT_Frequency" Role="LUT_Frequency" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Frequency">
+              <PropertyRef Name="FID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="FID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Service_Provider_Of_Asset">
+          <End Type="AssetTaggingModel1.LUT_Service_Provider_Of_Asset" Role="LUT_Service_Provider_Of_Asset" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Service_Provider_Of_Asset">
+              <PropertyRef Name="SPID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="SPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Sub_Group">
+          <End Type="AssetTaggingModel1.LUT_Sub_Group" Role="LUT_Sub_Group" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Sub_Group">
+              <PropertyRef Name="SGID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="SGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Tag_Type">
+          <End Type="AssetTaggingModel1.LUT_Tag_Type" Role="LUT_Tag_Type" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Tag_Type">
+              <PropertyRef Name="TID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="TID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LUT_Asset_Leased_To">
+          <Key>
+            <PropertyRef Name="ALID" />
+          </Key>
+          <Property Name="ALID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asset_Leased_To" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LUT_Current_Condition">
+          <Key>
+            <PropertyRef Name="CCID" />
+          </Key>
+          <Property Name="CCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Current_Condition" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Current_Condition" FromRole="LUT_Current_Condition" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Current_Condition">
+          <End Type="AssetTaggingModel1.LUT_Current_Condition" Role="LUT_Current_Condition" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Current_Condition">
+              <PropertyRef Name="CCID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="CCID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Geopoint">
+          <Key>
+            <PropertyRef Name="GeopointId" />
+          </Key>
+          <Property Name="GeopointId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="ts" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="GeographyPoint" Type="Geography" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="LUT_Asset_History">
+          <Key>
+            <PropertyRef Name="AHID" />
+          </Key>
+          <Property Name="AHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asset_History" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LUT_Binary_Q">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="QID" Type="Int32" Nullable="false" />
+          <Property Name="AID" Type="Int32" Nullable="false" />
+          <Property Name="Binary" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LUT_Questions">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarkersN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Lat" Type="Double" Nullable="false" />
+          <Property Name="Long" Type="Double" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LUT_Maintenance">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Maintenance" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_Assets_Masters_LUT_Maintenance" FromRole="LUT_Maintenance" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <Association Name="FK_LUT_Assets_Masters_LUT_Maintenance">
+          <End Type="AssetTaggingModel1.LUT_Maintenance" Role="LUT_Maintenance" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Maintenance">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="LUT_Assets_Masters">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LUT_History_of_Asset">
+          <Key>
+            <PropertyRef Name="AHID" />
+          </Key>
+          <Property Name="AHID" Type="Int32" Nullable="false" />
+          <Property Name="AID" Type="Int32" Nullable="false" />
+          <Property Name="HID" Type="Int32" Nullable="false" />
+          <Property Name="Current_Location_X" Type="Double" Nullable="false" />
+          <Property Name="Current_Location_Y" Type="Double" Nullable="false" />
+          <NavigationProperty Name="LUT_Assets_Masters" Relationship="AssetTaggingModel1.FK_LUT_History_of_Asset_LUT_Assets_Masters" FromRole="LUT_History_of_Asset" ToRole="LUT_Assets_Masters" />
+        </EntityType>
+        <Association Name="FK_LUT_History_of_Asset_LUT_Assets_Masters">
+          <End Type="AssetTaggingModel1.LUT_Assets_Masters" Role="LUT_Assets_Masters" Multiplicity="1" />
+          <End Type="AssetTaggingModel1.LUT_History_of_Asset" Role="LUT_History_of_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LUT_Assets_Masters">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="LUT_History_of_Asset">
+              <PropertyRef Name="AID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AssetTaggingModel1StoreContainer" CdmEntityContainer="AssetTaggingEntities">
+          <EntitySetMapping Name="LUT_Asset_Groups">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_Groups">
+              <MappingFragment StoreEntitySet="LUT_Asset_Groups">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Asset_Groups" ColumnName="Asset_Groups" />
+                <ScalarProperty Name="AGrpID" ColumnName="AGrpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Asset_Leased_or_Purchased">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_Leased_or_Purchased">
+              <MappingFragment StoreEntitySet="LUT_Asset_Leased_or_Purchased">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Asset_Leased_or_Purchased" ColumnName="Asset_Leased_or_Purchased" />
+                <ScalarProperty Name="ALPID" ColumnName="ALPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Asset_Manufacturers">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_Manufacturers">
+              <MappingFragment StoreEntitySet="LUT_Asset_Manufacturers">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Asset_Manufacturer" ColumnName="Asset_Manufacturer" />
+                <ScalarProperty Name="MnfID" ColumnName="MnfID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Asset_Ownership">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_Ownership">
+              <MappingFragment StoreEntitySet="LUT_Asset_Ownership">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Asset_Ownership" ColumnName="Asset_Ownership" />
+                <ScalarProperty Name="AOID" ColumnName="AOID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Asset_Priority">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_Priority">
+              <MappingFragment StoreEntitySet="LUT_Asset_Priority">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Asset_Priority" ColumnName="Asset_Priority" />
+                <ScalarProperty Name="APID" ColumnName="APID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Asset_Under">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_Under">
+              <MappingFragment StoreEntitySet="LUT_Asset_Under">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Asset_Under" ColumnName="Asset_Under" />
+                <ScalarProperty Name="AUID" ColumnName="AUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Asset_Users">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_Users">
+              <MappingFragment StoreEntitySet="LUT_Asset_Users">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="NameOfUser" ColumnName="NameOfUser" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="SecurityA" ColumnName="SecurityA" />
+                <ScalarProperty Name="SecurityQ" ColumnName="SecurityQ" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UsID" ColumnName="UsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Assets_Masters">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Assets_Masters">
+              <MappingFragment StoreEntitySet="LUT_Assets_Masters">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="GeographicPoint" ColumnName="GeographicPoint" />
+                <ScalarProperty Name="Current_Location_Y" ColumnName="Current_Location_Y" />
+                <ScalarProperty Name="Current_Location_X" ColumnName="Current_Location_X" />
+                <ScalarProperty Name="RFID" ColumnName="RFID" />
+                <ScalarProperty Name="Maintenance" ColumnName="Maintenance" />
+                <ScalarProperty Name="ALPID" ColumnName="ALPID" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Camera" ColumnName="Camera" />
+                <ScalarProperty Name="GPS" ColumnName="GPS" />
+                <ScalarProperty Name="NFC" ColumnName="NFC" />
+                <ScalarProperty Name="QR" ColumnName="QR" />
+                <ScalarProperty Name="PM" ColumnName="PM" />
+                <ScalarProperty Name="AMC" ColumnName="AMC" />
+                <ScalarProperty Name="Warranty" ColumnName="Warranty" />
+                <ScalarProperty Name="Depriciation_Value" ColumnName="Depriciation_Value" />
+                <ScalarProperty Name="TID" ColumnName="TID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Sub_Model" ColumnName="Sub_Model" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="CCID" ColumnName="CCID" />
+                <ScalarProperty Name="CSID" ColumnName="CSID" />
+                <ScalarProperty Name="Photo_of_Asset" ColumnName="Photo_of_Asset" />
+                <ScalarProperty Name="FID" ColumnName="FID" />
+                <ScalarProperty Name="Purchase_Price" ColumnName="Purchase_Price" />
+                <ScalarProperty Name="Date_of_Disposal" ColumnName="Date_of_Disposal" />
+                <ScalarProperty Name="Date_of_Purchase" ColumnName="Date_of_Purchase" />
+                <ScalarProperty Name="SPID" ColumnName="SPID" />
+                <ScalarProperty Name="MnfID" ColumnName="MnfID" />
+                <ScalarProperty Name="SGID" ColumnName="SGID" />
+                <ScalarProperty Name="AGrpID" ColumnName="AGrpID" />
+                <ScalarProperty Name="Name_of_Asset" ColumnName="Name_of_Asset" />
+                <ScalarProperty Name="AID" ColumnName="AID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Binary">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Binary">
+              <MappingFragment StoreEntitySet="LUT_Binary">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Binary" ColumnName="Binary" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Camera_Status">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Camera_Status">
+              <MappingFragment StoreEntitySet="LUT_Camera_Status">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Camera_Status" ColumnName="Camera_Status" />
+                <ScalarProperty Name="CaSID" ColumnName="CaSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Current_Location">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Current_Location">
+              <MappingFragment StoreEntitySet="LUT_Current_Location">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Last_Modified" ColumnName="Last_Modified" />
+                <ScalarProperty Name="Current_Location_Y" ColumnName="Current_Location_Y" />
+                <ScalarProperty Name="Current_Location_X" ColumnName="Current_Location_X" />
+                <ScalarProperty Name="CLID" ColumnName="CLID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Current_Status">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Current_Status">
+              <MappingFragment StoreEntitySet="LUT_Current_Status">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Current_Status" ColumnName="Current_Status" />
+                <ScalarProperty Name="CSID" ColumnName="CSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Frequency">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Frequency">
+              <MappingFragment StoreEntitySet="LUT_Frequency">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="FID" ColumnName="FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Frequency_Of_Annual_Maintenance_Contract">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Frequency_Of_Annual_Maintenance_Contract">
+              <MappingFragment StoreEntitySet="LUT_Frequency_Of_Annual_Maintenance_Contract">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Frequency_of_AMC" ColumnName="Frequency_of_AMC" />
+                <ScalarProperty Name="FAMCID" ColumnName="FAMCID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Service_Provider_Of_Asset">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Service_Provider_Of_Asset">
+              <MappingFragment StoreEntitySet="LUT_Service_Provider_Of_Asset">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Service_Provider_of_Asset" ColumnName="Service_Provider_of_Asset" />
+                <ScalarProperty Name="SPID" ColumnName="SPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Sub_Group">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Sub_Group">
+              <MappingFragment StoreEntitySet="LUT_Sub_Group">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Sub_Group" ColumnName="Sub_Group" />
+                <ScalarProperty Name="AGrpID" ColumnName="AGrpID" />
+                <ScalarProperty Name="SGID" ColumnName="SGID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Tag_Type">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Tag_Type">
+              <MappingFragment StoreEntitySet="LUT_Tag_Type">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Tag_Type" ColumnName="Tag_Type" />
+                <ScalarProperty Name="TID" ColumnName="TID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Asset_Leased_To">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_Leased_To">
+              <MappingFragment StoreEntitySet="LUT_Asset_Leased_To">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Asset_Leased_To" ColumnName="Asset_Leased_To" />
+                <ScalarProperty Name="ALID" ColumnName="ALID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Current_Condition">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Current_Condition">
+              <MappingFragment StoreEntitySet="LUT_Current_Condition">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Current_Condition" ColumnName="Current_Condition" />
+                <ScalarProperty Name="CCID" ColumnName="CCID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Geopoints">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.Geopoint">
+              <MappingFragment StoreEntitySet="Geopoint">
+                <ScalarProperty Name="GeographyPoint" ColumnName="GeographyPoint" />
+                <ScalarProperty Name="ts" ColumnName="ts" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="GeopointId" ColumnName="GeopointId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Asset_History">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Asset_History">
+              <MappingFragment StoreEntitySet="LUT_Asset_History">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Asset_History" ColumnName="Asset History" />
+                <ScalarProperty Name="AHID" ColumnName="AHID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Binary_Q">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Binary_Q">
+              <MappingFragment StoreEntitySet="LUT_Binary_Q">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Binary" ColumnName="Binary" />
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="QID" ColumnName="QID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Questions">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Questions">
+              <MappingFragment StoreEntitySet="LUT_Questions">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="QID" ColumnName="QID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarkersNs">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.MarkersN">
+              <MappingFragment StoreEntitySet="MarkersN">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_Maintenance">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_Maintenance">
+              <MappingFragment StoreEntitySet="LUT_Maintenance">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Maintenance" ColumnName="Maintenance" />
+                <ScalarProperty Name="MID" ColumnName="MID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LUT_History_of_Asset">
+            <EntityTypeMapping TypeName="AssetTaggingModel1.LUT_History_of_Asset">
+              <MappingFragment StoreEntitySet="LUT_History_of_Asset">
+                <ScalarProperty Name="Current_Location_Y" ColumnName="Current_Location_Y" />
+                <ScalarProperty Name="Current_Location_X" ColumnName="Current_Location_X" />
+                <ScalarProperty Name="HID" ColumnName="HID" />
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="AHID" ColumnName="AHID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

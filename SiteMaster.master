@@ -1,0 +1,171 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SiteMaster.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bootstrap-3.3.7-dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet" />
+       <style type="text/css">
+            .logo {
+            position: initial;
+            width: auto;
+    height: 100px;
+    float: left;
+    margin:  10px;
+        }
+           .bs-example{
+           margin: 20px;}
+          .dropbtn {
+    background-color: #333;
+    color: #9d9d9d;
+    padding: 12px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #4b4747;
+     color: white;
+}
+#myInput {
+    border-box: box-sizing;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+      
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: white}
+
+.show {display:block;}
+</style>
+
+        </head>
+    
+<body style="background-color:#f36d0e; font-size:18px; font-family:'Times New Roman', Times, serif; ">
+       <div id="wrapper">
+        <div id="header" style="background-color:white;  width: 100%;
+    height: 120px;
+       color: black;
+    font-size: 40px;
+    font-family:'Times New Roman', Times, serif;
+    text-align: center;
+    text-align:match-parent" > 
+                        <img class="logo"  src="images/icon.png" /><br /> ASSET CONNECT<br />
+            </div>
+        
+      <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="AssetConnect.aspx">AssetConnect</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="SearchAssets.aspx">Asset Masters</a></li>   
+     <li> <div class="dropdown">
+<button onclick="myFunction()" class="dropbtn" >Masters</button>
+  <div id="myDropdown" class="dropdown-content">
+    <input type="text" placeholder="Search" id="myInput" onkeyup="filterFunction()">
+    <a href="AssetGroupsMasters.aspx"> Asset Groups Masters</a>
+                  <a href="AssetLeasedOrPurchasedMasters.aspx"> Asset Leased Or Purchased Masters</a>
+                    <a href="AssetManufacturerMasters.aspx">Asset Manufacturer Masters</a>
+        <a href="AssetLeasedToMasters.aspx"> Asset Leased To Masters</a>
+                    <a href="AssetOwnershipMasters.aspx"> Asset Ownership Masters</a>
+                    <a href="AssetPriorityMasters.aspx"> Asset Priority Masters</a>
+                    <a href="AssetServiceProviderMasters.aspx"> Asset Service Provider Masters</a>
+                    <a href="AssetUnderMasters.aspx"> Asset Under Masters</a>
+                                       <a href="CameraStatusMasters.aspx"> Camera Status Masters</a>
+                    <a href="CurrentConditionMasters.aspx"> Current Condition Masters</a>
+                    <a href="CurrentLocationMasters.aspx"> Current Location Masters</a>
+                    <a href="CurrentStatusMasters.aspx"> Current Status Masters</a>
+                    <a href="FrequencyMasters.aspx"> Frequency Masters</a>
+                    <a href="FrquencyofAMCMasters.aspx"> Frquency of AMC Masters</a>
+                    <a href="Masters.aspx"> Binary Masters</a>
+                    <a href="SubGroupMasters.aspx"> Sub-Group Masters</a>
+                    <a href="TagTypeMasters.aspx"> Tag Type Masters</a>
+  </div>
+</div>
+       </li>       
+      <li><a href="Transactions.aspx">Transactions</a></li>
+           
+        <li><a href="LocateYourAsset.aspx">Locate Your Asset</a></li> 
+         <li><a href="Home.aspx">Log Out</a></li> 
+     
+    </ul>
+  </div>
+</nav>
+        <div id="content"  style="margin-top:50px">
+            <form id="form1" runat="server" >   <%--runat="server"--%>
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                    
+                </asp:ContentPlaceHolder>
+                </form>
+                </div>
+          </div>
+         <div id="footer" style=" width: 100%;
+    height: 20px;
+    background-color: darkslategray;
+    font-size: 14px;
+    text-align: center;">Software By: Parag Khatavkar, Sanatomba Singh, Adithi R. Upadhya [Copyright @ 2017]
+        </div>
+    <script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+</script>
+     </body>
+  
+   </html>

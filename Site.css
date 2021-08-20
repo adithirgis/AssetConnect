@@ -1,0 +1,283 @@
+﻿body {
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h1 {
+    color: white;
+    font-family: 'Times New Roman';
+    font-size: 50px;
+}
+h2 {
+    text-align: center;
+    font-family: 'Times New Roman';
+}
+
+p {
+    font-family: 'Times New Roman';
+    font-size: 15px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+    li a, .dropbtn {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        li a:hover, .dropdown:hover .dropbtn {
+            background-color: #333;
+        }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+#wrapper {
+    width: 1355px;
+    margin: 0 auto;
+}
+a{
+    font-size:20px;
+    line-height:1em;
+    padding: 20px,40px;
+        display:inline-block;
+        color:white;
+
+}
+
+
+#header {
+    width: 100%;
+    height: 160px;
+    background: #21618C;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    background-color: #333;
+}
+.btns {
+    color: black;
+    height: 37px;
+    width: auto;
+    margin: 2px;
+}
+
+#header u{
+    text-align:center;
+}
+
+#content {
+    width: 1355px;
+    min-height: 800px;
+    background-color: white;
+    font-size: 20px;
+    align-content: center;
+    text-align: center;
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidenav a:hover, .offcanvas a:focus {
+            color: #f1f1f1;
+        }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+@media screen and (max-height: 6000px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 25px;
+        }
+}
+
+.mySlides {
+    display: none
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 100%;
+    position: relative;
+    margin: auto;
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 30px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 8px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    height: 13px;
+    width: 13px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.0s ease;/*//0.1*/
+}
+
+.active {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 0.0s;  /*//1.5 down its 4.5*/
+    animation-name: fade;
+    animation-duration: 0.0s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .1  /*here its 4 and next its 1*/
+    }
+
+    to {
+        opacity: 0.4
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .text {
+        font-size: 11px
+    }
+}
+
+.danger {
+    background-color: #f44336;
+}
+    /* Red */
+    .danger:hover {
+        background: #da190b;
+    }
+
+.default {
+    background-color: #e7e7e7;
+    color: black;
+}
+    /* Gray */
+    .default:hover {
+        background: #ddd;
+    }
+
+#footer {
+    width: 100%;
+    height: 20px;
+    background-color: darkslategray;
+    font-size: 10px;
+    text-align: center;
+}
+#h2{
+    text-align:center;
+}
+
+#icon {
+    position: initial;
+    width: auto;
+    height: 120px;
+    float: left;
+    margin: 10px;
+}
+.auto-style1 {  /*for image*/
+    position: initial;
+    width: auto;
+    height: 120px;
+    float: left;
+    margin: 10px;
+}
